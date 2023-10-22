@@ -10,24 +10,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Clone RISC-V GNU Toolchain
+    - name: Clone QEMU from GitLab
       run: |
-        git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git
-        cd riscv-gnu-toolchain
+        git clone https://gitlab.com/qemu-project/qemu.git
+        cd qemu
         mkdir install
       shell: bash
 
-    - name: Configure RISC-V Toolchain
+    - name: Configure QEMU
       run: |
-        ./configure --prefix=$HOME/riscv-gnu-toolchain/install
-      working-directory: riscv-gnu-toolchain
+        ./configure --prefix=/mnt/c/Users/User/qemu/install --target-list=riscv64-linux-user
+      working-directory: qemu
       shell: bash
 
-    - name: Build RISC-V Toolchain
+    - name: Build QEMU
       run: |
         make
-        make build-qemu
-      working-directory: riscv-gnu-toolchain
+        make install
+      working-directory: qemu
       shell: bash
 
     - name: Add LLVM GPG key
