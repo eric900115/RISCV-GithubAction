@@ -9,13 +9,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Clone QEMU from GitLab
+      
+    - name: Disable SSH Agent
       run: |
-        git clone https://gitlab.com/qemu-project/qemu.git
-        cd qemu
-        mkdir install
+        unset SSH_AUTH_SOCK
       shell: bash
+    
     - name: Install Packages
       run: |
         sudo apt-get update
@@ -23,6 +22,14 @@ jobs:
         pip3 install sphinx==5.3.0
         sudo apt-get install -y ninja-build
       shell: bash
+    
+    - name: Clone QEMU from GitLab
+      run: |
+        git clone https://gitlab.com/qemu-project/qemu.git
+        cd qemu
+        mkdir install
+      shell: bash
+      
     - name: Configure QEMU
       run: |
         ./configure --prefix=/mnt/c/Users/User/qemu/install --target-list=riscv64-linux-user
