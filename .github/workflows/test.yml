@@ -14,11 +14,12 @@ jobs:
       run: |
         git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git
         cd riscv-gnu-toolchain
+        mkdir install
       shell: bash
 
     - name: Configure RISC-V Toolchain
       run: |
-        ./configure
+        ./configure --prefix=./install
       working-directory: riscv-gnu-toolchain
       shell: bash
 
