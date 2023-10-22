@@ -19,7 +19,7 @@ jobs:
 
     - name: Configure RISC-V Toolchain
       run: |
-        ./configure --prefix=./install
+        ./configure --prefix=$HOME/riscv-gnu-toolchain/install
       working-directory: riscv-gnu-toolchain
       shell: bash
 
