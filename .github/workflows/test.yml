@@ -10,10 +10,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Start SSH agent and add key
-      run: |
-        eval $(ssh-agent -s)
-        ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - name: Start SSH Agent
+        run: |
+          eval $(ssh-agent)
+          nohup ssh-add <(echo "$SSH_PRIVATE_KEY") >/dev/null 2>&1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     
