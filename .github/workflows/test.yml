@@ -29,9 +29,10 @@ jobs:
       shell: bash
     - name: Configure and Build QEMU
       run: |
-        ./configure --prefix=/mnt/c/Users/User/qemu/install --target-list=riscv64-linux-user
+        sudo ./configure --target-list=riscv64-linux-user
         sudo make
         sudo make install
+        qemu-riscv64 --version
       working-directory: qemu
       shell: bash
     - name: Install Clang-17, LLDB-17, and LLD-17
