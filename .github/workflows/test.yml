@@ -11,11 +11,9 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Start SSH Agent
-        run: |
-          eval $(ssh-agent)
-          nohup ssh-add <(echo "$SSH_PRIVATE_KEY") >/dev/null 2>&1
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        eval $(ssh-agent)
+        nohup ssh-add <(echo "$SSH_PRIVATE_KEY") >/dev/null 2>&1
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     
