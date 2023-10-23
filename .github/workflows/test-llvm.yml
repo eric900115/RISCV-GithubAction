@@ -1,0 +1,29 @@
+name: RISC-V Toolchain and LLVM Installation
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Install Packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3 python3-pip
+        pip3 install sphinx==5.3.0
+        sudo apt-get install -y ninja-build
+      shell: bash
+
+    - name: Add LLVM GPG key
+      run: wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+      shell: bash
+
+    - name: Install Clang-17, LLDB-17, and LLD-17
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-17 lldb-17 lld-17
+      shell: bash
