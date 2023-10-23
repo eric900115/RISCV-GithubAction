@@ -23,10 +23,8 @@ jobs:
       shell: bash
     - name: Build RISC-V GNU Toolchain
       run: |
-        git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git
-        cd riscv-gnu-toolchain
-        ./configure
-        sudo make
+        wget https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.10.18/riscv64-elf-ubuntu-22.04-gcc-nightly-2023.10.18-nightly.tar.gz
+        tar -xvf riscv64-elf-ubuntu-22.04-gcc-nightly-2023.10.18-nightly.tar.gz
       shell: bash
     - name: Clone QEMU
       run: |
