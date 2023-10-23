@@ -10,10 +10,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Disable SSH Agent
+    - name: Start SSH agent and add key
       run: |
-        unset SSH_AUTH_SOCK
-      shell: bash
+        eval $(ssh-agent -s)
+        ssh-add <(echo "$SSH_PRIVATE_KEY")
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     
     - name: Install Packages
       run: |
